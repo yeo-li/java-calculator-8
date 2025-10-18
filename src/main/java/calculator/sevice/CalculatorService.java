@@ -104,4 +104,13 @@ public class CalculatorService {
         }
     }
 
+    public long sumAllNumbers(List<Integer> numbers) {
+        long sum = 0;
+        for (int number : numbers) {
+            sum += number;
+        }
+
+        return sum;
+    }
+
 }
