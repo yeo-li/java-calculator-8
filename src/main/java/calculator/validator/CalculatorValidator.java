@@ -72,4 +72,12 @@ public class CalculatorValidator {
         }
         return false;
     }
+
+    public static void validateOutOfRange(long sum, int number) {
+        try {
+            long result = Math.addExact(sum, number);
+        } catch (ArithmeticException e) {
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_LONG_OVER_FLOW.getMessage());
+        }
+    }
 }

@@ -68,6 +68,7 @@ public class CalculatorService {
     public long sumAllNumbers(List<Integer> numbers) {
         long sum = 0;
         for (int number : numbers) {
+            CalculatorValidator.validateOutOfRange(sum, number);
             sum += number;
         }
         return sum;
