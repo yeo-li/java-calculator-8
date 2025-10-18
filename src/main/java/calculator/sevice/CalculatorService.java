@@ -41,7 +41,8 @@ public class CalculatorService {
     }
 
     public List<Integer> parseNumbers(String calculationBody, String customDelimiter) {
-        String[] parsedCalculationBody = calculationBody.split(createRegex(customDelimiter));
+        String regex = createRegex(customDelimiter);
+        String[] parsedCalculationBody = calculationBody.split(regex);
         CalculatorValidator.validateCalculationBody(parsedCalculationBody);
 
         return convertNumberList(parsedCalculationBody);
