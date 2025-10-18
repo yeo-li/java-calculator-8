@@ -1,5 +1,8 @@
 package calculator.sevice;
 
+import calculator.constant.DelimiterRegex;
+import calculator.constant.DelimiterStatus;
+import calculator.constant.DelimiterSymbol;
 import calculator.validator.CalculatorValidator;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +13,11 @@ public class CalculatorService {
         CalculatorValidator.validateCustomDelimiter(input);
 
         if (!hasCustomDelimiter(input)) {
-            return "";
+            return DelimiterStatus.NONE.getStatus();
         }
 
-        int start = input.indexOf("//") + 2;
-        int end = input.indexOf("\\n");
+        int start = input.indexOf(DelimiterSymbol.CUSTOM_PREFIX.getSymbol()) + 2;
+        int end = input.indexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
 
         return input.substring(start, end);
     }
@@ -24,7 +27,7 @@ public class CalculatorService {
 
         String numberSection = input;
         if (hasCustomDelimiter(input)) {
-            int start = input.indexOf("\\n") + 2;
+            int start = input.indexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol()) + 2;
             numberSection = input.substring(start);
         }
 
@@ -32,11 +35,12 @@ public class CalculatorService {
     }
 
     private boolean hasCustomDelimiter(String input) {
-        return input.contains("//") && input.contains("\\n");
+        return input.contains(DelimiterSymbol.CUSTOM_PREFIX.getSymbol()) && input.contains(
+                DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
     }
 
     public List<Integer> parseNumbers(String calculationBody, String customDelimiter) {
-        String regex = ",|:";
+        String regex = DelimiterRegex.BASIC_REGEX.getConstant();
         if (!customDelimiter.isBlank()) {
             regex += "|" + customDelimiter;
         }
@@ -49,7 +53,6 @@ public class CalculatorService {
 
     private List<Integer> convertNumberList(String[] calculationBody) {
         List<Integer> numbers = new ArrayList<>();
-        
         for (String number : calculationBody) {
             numbers.add(Integer.parseInt(number));
         }
@@ -62,7 +65,6 @@ public class CalculatorService {
         for (int number : numbers) {
             sum += number;
         }
-
         return sum;
     }
 

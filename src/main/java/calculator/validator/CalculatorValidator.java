@@ -1,24 +1,28 @@
 package calculator.validator;
 
+import calculator.constant.DelimiterSymbol;
 import calculator.exception.ErrorMessage;
 
 public class CalculatorValidator {
     public static void validateCustomDelimiter(String input) {
 
-        if (!input.contains("//") && !input.contains("\\n")) {
+        if (!input.contains(DelimiterSymbol.CUSTOM_PREFIX.getSymbol()) && !input.contains(
+                DelimiterSymbol.CUSTOM_SUFFIX.getSymbol())) {
             return;
         }
 
-        if (input.contains("//") && !input.contains("\\n")) {
+        if (input.contains(DelimiterSymbol.CUSTOM_PREFIX.getSymbol()) && !input.contains(
+                DelimiterSymbol.CUSTOM_SUFFIX.getSymbol())) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_INVALID.getMessage());
         }
 
-        if (input.contains("\\n") && !input.contains("//")) {
+        if (input.contains(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol()) && !input.contains(
+                DelimiterSymbol.CUSTOM_PREFIX.getSymbol())) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_INVALID.getMessage());
         }
 
-        int prefixIndex = input.indexOf("//");
-        int suffixIndex = input.indexOf("\\n");
+        int prefixIndex = input.indexOf(DelimiterSymbol.CUSTOM_PREFIX.getSymbol());
+        int suffixIndex = input.indexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
 
         if (prefixIndex != 0) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_INVALID.getMessage());
@@ -28,8 +32,8 @@ public class CalculatorValidator {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_INVALID.getMessage());
         }
 
-        int start = input.indexOf("//") + 2;
-        int end = input.indexOf("\\n");
+        int start = input.indexOf(DelimiterSymbol.CUSTOM_PREFIX.getSymbol()) + 2;
+        int end = input.indexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
         String customDelimiter = input.substring(start, end);
 
         if (containNumber(customDelimiter)) {
