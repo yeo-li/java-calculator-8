@@ -15,9 +15,10 @@ class CalculatorServiceTest {
             {
                     "//d\\n1d2d3, d",
                     "//park\\n1park2park3, park",
-                    "//\\\\n1\\2\\3, \\",
+                    "//\\n\\n1\\2\\3, \\n",
                     "//\\n1\\2\\3, ''",
-                    "1:2:3, ''"
+                    "1:2:3, ''",
+                    "////\\n1//2//3, //"
             }
     )
     @DisplayName("사용자 입력값으로부터 커스텀 구분자 추출 - 성공")
@@ -103,6 +104,5 @@ class CalculatorServiceTest {
                 }
         );
     }
-
 
 }
