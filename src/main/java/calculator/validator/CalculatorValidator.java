@@ -1,5 +1,7 @@
 package calculator.validator;
 
+import calculator.exception.ErrorMessage;
+
 public class CalculatorValidator {
     public static void validateCustomDelimiter(String input) {
 
@@ -8,22 +10,22 @@ public class CalculatorValidator {
         }
 
         if (input.contains("//") && !input.contains("\\n")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_INVALID.getMessage());
         }
 
         if (input.contains("\\n") && !input.contains("//")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_INVALID.getMessage());
         }
 
         int prefixIndex = input.indexOf("//");
         int suffixIndex = input.indexOf("\\n");
 
         if (prefixIndex != 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_INVALID.getMessage());
         }
 
         if (prefixIndex > suffixIndex) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_INVALID.getMessage());
         }
 
         int start = input.indexOf("//") + 2;
@@ -31,14 +33,14 @@ public class CalculatorValidator {
         String customDelimiter = input.substring(start, end);
 
         if (containNumber(customDelimiter)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_CONTAIN_NUMBER.getMessage());
         }
     }
 
     public static void validateCalculationBody(String[] calculationBody) {
         for (String number : calculationBody) {
             if (!isNumber(number)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER.getMessage());
             }
         }
     }
