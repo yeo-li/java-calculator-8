@@ -27,7 +27,7 @@ public class CalculatorService {
 
         String numberSection = input;
         if (hasCustomDelimiter(input)) {
-            int start = input.indexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol()) + 2;
+            int start = input.lastIndexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol()) + 2;
             numberSection = input.substring(start);
         }
 
