@@ -17,7 +17,7 @@ public class CalculatorService {
         }
 
         int start = input.indexOf(DelimiterSymbol.CUSTOM_PREFIX.getSymbol()) + 2;
-        int end = input.indexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
+        int end = input.lastIndexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
 
         return input.substring(start, end);
     }
