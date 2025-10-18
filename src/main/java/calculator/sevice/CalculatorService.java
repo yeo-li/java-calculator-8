@@ -30,7 +30,7 @@ public class CalculatorService {
 
         return numberSection;
     }
-    
+
     private boolean hasCustomDelimiter(String input) {
         return input.contains("//") && input.contains("\\n");
     }
@@ -44,10 +44,13 @@ public class CalculatorService {
         String[] parsedCalculationBody = calculationBody.split(regex);
         CalculatorValidator.validateCalculationBody(parsedCalculationBody);
 
-        List<Integer> numbers = new ArrayList<>();
+        return convertNumberList(parsedCalculationBody);
+    }
 
-        // converter
-        for (String number : parsedCalculationBody) {
+    private List<Integer> convertNumberList(String[] calculationBody) {
+        List<Integer> numbers = new ArrayList<>();
+        
+        for (String number : calculationBody) {
             numbers.add(Integer.parseInt(number));
         }
 
