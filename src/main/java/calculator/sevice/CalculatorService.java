@@ -43,9 +43,30 @@ public class CalculatorService {
     public List<Integer> parseNumbers(String calculationBody, String customDelimiter) {
         String regex = createRegex(customDelimiter);
         String[] parsedCalculationBody = calculationBody.split(regex);
+        parsedCalculationBody = filterCalculationBody(parsedCalculationBody);
         CalculatorValidator.validateCalculationBody(parsedCalculationBody);
 
         return convertNumberList(parsedCalculationBody);
+    }
+
+    private String[] filterCalculationBody(String[] calculationBody) {
+        int length = 0;
+        for (int i = 0; i < calculationBody.length; i++) {
+            if (!calculationBody[i].isBlank()) {
+                length++;
+            }
+        }
+
+        String[] filteredCalculationBody = new String[length];
+        int index = 0;
+        for (String number : calculationBody) {
+            if (!calculationBody[index].isBlank()) {
+                filteredCalculationBody[index] = number;
+                index++;
+            }
+        }
+
+        return filteredCalculationBody;
     }
 
     private String createRegex(String customDelimiter) {
@@ -72,6 +93,7 @@ public class CalculatorService {
             CalculatorValidator.validateOutOfRange(sum, number);
             sum += number;
         }
+
         return sum;
     }
 
