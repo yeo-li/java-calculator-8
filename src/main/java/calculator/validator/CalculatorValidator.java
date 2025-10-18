@@ -51,7 +51,7 @@ public class CalculatorValidator {
 
     private static boolean isNumber(String number) {
         for (char c : number.toCharArray()) {
-            if ('0' > c || c > '9') {
+            if (Character.isDigit(c)) {
                 return false;
             }
         }
@@ -60,7 +60,7 @@ public class CalculatorValidator {
 
     private static boolean containNumber(String input) {
         for (char c : input.toCharArray()) {
-            if ('0' <= c && c <= '9') {
+            if (Character.isDigit(c)) {
                 return true;
             }
         }
