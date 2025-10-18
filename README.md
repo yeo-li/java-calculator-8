@@ -64,11 +64,10 @@
 
 ## Main Features
 
-- [ ] `splitInputSections()`: 커스텀 구분자 등록 부분 계산 부분 분리
 - [x] `extractCustomDelimiter()`: 커스텀 구분자 추출
 - [x] `extractCalculationBody()` : 계산할 문자열 추출
 - [x] `parseNumbers(String calculationBody, String customDelimiter)`: 구분자 기반 숫자 추출
-- [ ] `calculateSum(List<Integer> numbers)`: 숫자들의 합 계산
+- [x] `sumAllNumbers(List<Integer> numbers)`: 숫자들의 합 계산
 
 ## Output
 
