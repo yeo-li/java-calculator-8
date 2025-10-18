@@ -105,4 +105,25 @@ class CalculatorServiceTest {
         );
     }
 
+    @ParameterizedTest
+    @CsvSource(
+            {
+                    "//d\\n1d2d3, 1d2d3",
+                    "//park\\n1park2park3, 1park2park3",
+                    "//\\n\\n1\\2\\3, 1\\2\\3",
+                    "//\\n1\\2\\3, 1\\2\\3",
+                    "1:2:3, 1:2:3",
+                    "////\\n1//2//3, 1//2//3"
+            }
+    )
+    @DisplayName("사용자 입력값으로부터 계산 부분 추출 - 성공")
+    void extractCalculationBodySuccess(String input, String expectedDelimiter) {
+        // when
+        String customDelimiter = calculatorService.extractCalculationBody(input);
+
+        // then
+        Assertions.assertEquals(expectedDelimiter, customDelimiter);
+    }
+
+
 }
