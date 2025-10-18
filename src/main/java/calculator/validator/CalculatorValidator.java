@@ -51,7 +51,7 @@ public class CalculatorValidator {
 
     private static boolean isNumber(String number) {
         for (char c : number.toCharArray()) {
-            if (Character.isDigit(c)) {
+            if (!Character.isDigit(c)) {
                 return false;
             }
         }
