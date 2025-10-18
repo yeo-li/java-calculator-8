@@ -1,5 +1,6 @@
 package calculator.sevice;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -186,4 +187,17 @@ class CalculatorServiceTest {
         );
     }
 
+    @Test
+    @DisplayName("숫자 합 계산 - 성공")
+    void sumAllNumbersSuccess() {
+        // given
+        List<Integer> input = new ArrayList<>(List.of(1, 2, 3));
+        long expected = 6;
+
+        // when
+        long actual = calculatorService.sumAllNumbers(input);
+
+        // then
+        Assertions.assertEquals(expected, actual);
+    }
 }
