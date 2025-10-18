@@ -6,6 +6,7 @@ import calculator.constant.DelimiterSymbol;
 import calculator.validator.CalculatorValidator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class CalculatorService {
 
@@ -40,15 +41,19 @@ public class CalculatorService {
     }
 
     public List<Integer> parseNumbers(String calculationBody, String customDelimiter) {
-        String regex = DelimiterRegex.BASIC_REGEX.getConstant();
-        if (!customDelimiter.isBlank()) {
-            regex += "|" + customDelimiter;
-        }
-
-        String[] parsedCalculationBody = calculationBody.split(regex);
+        String[] parsedCalculationBody = calculationBody.split(createRegex(customDelimiter));
         CalculatorValidator.validateCalculationBody(parsedCalculationBody);
 
         return convertNumberList(parsedCalculationBody);
+    }
+
+    private String createRegex(String customDelimiter) {
+        String regex = DelimiterRegex.BASIC_REGEX.getConstant();
+        if (!customDelimiter.isBlank()) {
+            regex += "|" + Pattern.quote(customDelimiter);
+        }
+
+        return regex;
     }
 
     private List<Integer> convertNumberList(String[] calculationBody) {
