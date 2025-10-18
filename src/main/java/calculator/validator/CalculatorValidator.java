@@ -46,6 +46,12 @@ public class CalculatorValidator {
             if (!isNumber(number)) {
                 throw new IllegalArgumentException(ErrorMessage.INVALID_NUMBER.getMessage());
             }
+
+            try {
+                Integer.parseInt(number);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException(ErrorMessage.NUMBER_OUT_OF_RANGE.getMessage());
+            }
         }
     }
 
