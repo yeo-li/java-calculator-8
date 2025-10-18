@@ -59,12 +59,13 @@
         1. "//"만 존재하는 경우
         2. "\n"만 존재하는 경우
         3. "\n"이 "//" 보다 앞에 있는 경우
+        4. 커스텀 구분자 등록 문법이 맨 앞에 있지 않는 경우
     4. 커스텀 구분자가 숫자인 경우
 
 ## Main Features
 
 - [ ] `splitInputSections()`: 커스텀 구분자 등록 부분 계산 부분 분리
-- [ ] `extractCustomDelimiter()`: 커스텀 구분자 추출
+- [x] `extractCustomDelimiter()`: 커스텀 구분자 추출
 - [ ] `registerDelimiter(String delimiter)`: 커스텀 구분자 저장
 - [ ] `splitNumbers(String numbersSection)`: 구분자 기반 숫자 추출
 - [ ] `calculateSum(List<Integer> numbers)`: 숫자들의 합 계산
