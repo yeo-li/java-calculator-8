@@ -23,7 +23,7 @@ public class CalculatorService {
 
         String numberSection = input;
         if (hasCustomDelimiter(input)) {
-            int start = input.indexOf("\\n") + 3;
+            int start = input.indexOf("\\n") + 2;
             numberSection = input.substring(start);
         }
 
@@ -31,7 +31,10 @@ public class CalculatorService {
     }
 
     public List<Integer> parseNumbers(String calculationBody, String customDelimiter) {
-        String regex = ",|:|" + customDelimiter;
+        String regex = ",|:";
+        if (!customDelimiter.isBlank()) {
+            regex += "|" + customDelimiter;
+        }
 
         String[] parsedCalculationBody = calculationBody.split(regex);
         validateCalculationBody(parsedCalculationBody);
