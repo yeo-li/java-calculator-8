@@ -22,7 +22,7 @@ public class CalculatorValidator {
         }
 
         int prefixIndex = input.indexOf(DelimiterSymbol.CUSTOM_PREFIX.getSymbol());
-        int suffixIndex = input.indexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
+        int suffixIndex = input.lastIndexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
 
         if (prefixIndex != 0) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_INVALID.getMessage());
@@ -32,6 +32,10 @@ public class CalculatorValidator {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_IS_INVALID.getMessage());
         }
 
+        if (hasMultipleCustomSuffix(input)) {
+            throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_CONTAIN_CUSTOM_SUFFIX.getMessage());
+        }
+        
         int start = input.indexOf(DelimiterSymbol.CUSTOM_PREFIX.getSymbol()) + 2;
         int end = input.indexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
         String customDelimiter = input.substring(start, end);
@@ -39,6 +43,14 @@ public class CalculatorValidator {
         if (containNumber(customDelimiter)) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_CONTAIN_NUMBER.getMessage());
         }
+
+    }
+
+    private static boolean hasMultipleCustomSuffix(String input) {
+        int firstCustomSuffixIndex = input.indexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
+        int lastCustomSuffixIndex = input.lastIndexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
+
+        return firstCustomSuffixIndex != lastCustomSuffixIndex;
     }
 
     public static void validateCalculationBody(String[] calculationBody) {
@@ -61,6 +73,7 @@ public class CalculatorValidator {
                 return false;
             }
         }
+
         return true;
     }
 
