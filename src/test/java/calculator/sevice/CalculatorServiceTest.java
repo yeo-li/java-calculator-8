@@ -17,7 +17,6 @@ class CalculatorServiceTest {
             {
                     "//d\\n1d2d3, d",
                     "//park\\n1park2park3, park",
-                    "//\\n\\n1\\2\\3, \\n",
                     "//\\n1\\2\\3, ''",
                     "1:2:3, ''",
                     "////\\n1//2//3, //"
@@ -107,13 +106,26 @@ class CalculatorServiceTest {
         );
     }
 
+    @Test
+    @DisplayName("사용자 입력값으로부터 커스텀 구분자 추출 - 커스텀 구분자에 \\n이 포함되어 있는 경우")
+    void parseCustomDelimiterCustomDelimiterContainSuffix() {
+        // given
+        String input = "//\\na\\n\\n1\na\n2\na\n3";
+
+        // when & then
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> {
+                    calculatorService.parseCustomDelimiter(input);
+                }
+        );
+    }
+
     @ParameterizedTest
     @CsvSource(
             {
                     "//d\\n1d2d3, 1d2d3",
                     "//park\\n1park2park3, 1park2park3",
-                    "//\\n\\n1\\2\\3, 1\\2\\3",
-                    "//\\n1\\2\\3, 1\\2\\3",
                     "1:2:3, 1:2:3",
                     "////\\n1//2//3, 1//2//3"
             }
