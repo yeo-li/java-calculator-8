@@ -5,9 +5,9 @@ public enum ErrorMessage {
     CUSTOM_DELIMITER_CONTAIN_NUMBER("커스텀 지정자에 숫자가 포함되어 있습니다."),
     INVALID_NUMBER("숫자가 아닌 값이 포함되어 있습니다."),
     NUMBER_OUT_OF_RANGE("입력 가능한 숫자의 범위를 초과했습니다."),
-    NUMBER_LONG_OVER_FLOW("합계가 long의 범위를 초과했습니다.");
-
-
+    NUMBER_LONG_OVER_FLOW("합계가 long의 범위를 초과했습니다."),
+    CUSTOM_DELIMITER_CONTAIN_CUSTOM_SUFFIX("커스텀 구분자는 \\n이 포함 될 수 없습니다.");
+    
     private final String message;
 
     ErrorMessage(String message) {
