@@ -1,4 +1,4 @@
-package calculator.constant;
+package calculator.constant.delimiter;
 
 public enum DelimiterStatus {
     NONE("");

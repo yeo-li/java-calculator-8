@@ -1,6 +1,6 @@
 package calculator.validator;
 
-import calculator.constant.DelimiterSymbol;
+import calculator.constant.delimiter.DelimiterSymbol;
 import calculator.exception.ErrorMessage;
 
 public class CalculatorValidator {
@@ -35,7 +35,7 @@ public class CalculatorValidator {
         if (hasMultipleCustomSuffix(input)) {
             throw new IllegalArgumentException(ErrorMessage.CUSTOM_DELIMITER_CONTAIN_CUSTOM_SUFFIX.getMessage());
         }
-        
+
         int start = input.indexOf(DelimiterSymbol.CUSTOM_PREFIX.getSymbol()) + 2;
         int end = input.indexOf(DelimiterSymbol.CUSTOM_SUFFIX.getSymbol());
         String customDelimiter = input.substring(start, end);
