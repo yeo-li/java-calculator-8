@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.dto.ParsedInput;
 import calculator.sevice.CalculatorService;
 import calculator.view.InputView;
 import calculator.view.OutputView;
@@ -13,10 +14,23 @@ public class CalculatorController {
 
     public void run() {
         String input = inputView.readInput();
-        String customDelimiter = calculatorService.parseCustomDelimiter(input);
-        String calculationBody = calculatorService.extractCalculationBody(input);
-        List<Integer> numbers = calculatorService.parseNumbers(calculationBody, customDelimiter);
-        long result = calculatorService.sumAllNumbers(numbers);
+        ParsedInput parsedInput = parseInput(input);
+        long result = calculate(parsedInput);
         outputView.printOutput(result);
+    }
+
+    public ParsedInput parseInput(String input) {
+        String cleanedInput = calculatorService.removeAllSpaces(input);
+        String customDelimiter = calculatorService.parseCustomDelimiter(cleanedInput);
+        String calculationBody = calculatorService.extractCalculationBody(cleanedInput);
+
+        return new ParsedInput(calculationBody, customDelimiter);
+    }
+
+    public long calculate(ParsedInput parsedInput) {
+        List<Integer> numbers = calculatorService.parseNumbers(
+                parsedInput.getCalculationBody(),
+                parsedInput.getCustomDelimiter());
+        return calculatorService.sumAllNumbers(numbers);
     }
 }
