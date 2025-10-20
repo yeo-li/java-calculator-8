@@ -10,6 +10,10 @@ import java.util.regex.Pattern;
 
 public class CalculatorService {
 
+    public String removeAllSpaces(String input) {
+        return input.replaceAll(" ", "");
+    }
+
     public String parseCustomDelimiter(String input) {
         CalculatorValidator.validateCustomDelimiter(input);
 
