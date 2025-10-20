@@ -1,8 +1,10 @@
 package calculator.sevice;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +30,7 @@ class CalculatorServiceTest {
         String customDelimiter = calculatorService.parseCustomDelimiter(input);
 
         // then
-        Assertions.assertEquals(expectedDelimiter, customDelimiter);
+        assertThat(customDelimiter).isEqualTo(expectedDelimiter);
     }
 
     @Test
@@ -38,12 +40,8 @@ class CalculatorServiceTest {
         String input = "//d1d2d3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    calculatorService.parseCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> calculatorService.parseCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -53,12 +51,8 @@ class CalculatorServiceTest {
         String input = "\\nd1d2d3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    calculatorService.parseCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> calculatorService.parseCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -68,12 +62,8 @@ class CalculatorServiceTest {
         String input = "\\nd//3d1d2d3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    calculatorService.parseCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> calculatorService.parseCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -83,12 +73,8 @@ class CalculatorServiceTest {
         String input = "3d1d2d3//d\\n";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    calculatorService.parseCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> calculatorService.parseCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -98,12 +84,8 @@ class CalculatorServiceTest {
         String input = "//1\\n1d2d3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    calculatorService.parseCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> calculatorService.parseCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -113,12 +95,8 @@ class CalculatorServiceTest {
         String input = "//\\na\\n\\n1\na\n2\na\n3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    calculatorService.parseCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> calculatorService.parseCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
@@ -136,7 +114,7 @@ class CalculatorServiceTest {
         String calculationBody = calculatorService.extractCalculationBody(input);
 
         // then
-        Assertions.assertEquals(expectedCalculationBody, calculationBody);
+        assertThat(calculationBody).isEqualTo(expectedCalculationBody);
     }
 
     @ParameterizedTest
@@ -165,7 +143,7 @@ class CalculatorServiceTest {
 
         // then
         for (int i = 0; i < expected.length; i++) {
-            Assertions.assertEquals(expected[i], numbers.get(i));
+            assertThat(numbers.get(i)).isEqualTo(expected[i]);
         }
     }
 
@@ -176,12 +154,8 @@ class CalculatorServiceTest {
         String input = "1,a,3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    calculatorService.parseNumbers(input, "");
-                }
-        );
+        assertThatThrownBy(() -> calculatorService.parseNumbers(input, ""))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -191,12 +165,8 @@ class CalculatorServiceTest {
         String input = "1,129413413412413432412,3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    calculatorService.parseNumbers(input, "");
-                }
-        );
+        assertThatThrownBy(() -> calculatorService.parseNumbers(input, ""))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -210,6 +180,6 @@ class CalculatorServiceTest {
         long actual = calculatorService.sumAllNumbers(input);
 
         // then
-        Assertions.assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 }

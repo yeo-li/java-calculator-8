@@ -1,6 +1,7 @@
 package calculator.validator;
 
-import org.junit.jupiter.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,10 +13,8 @@ class CalculatorValidatorTest {
         String input = "//d1d2d3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> CalculatorValidator.validateCustomDelimiter(input)
-        );
+        assertThatThrownBy(() -> CalculatorValidator.validateCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -25,12 +24,8 @@ class CalculatorValidatorTest {
         String input = "\\nd1d2d3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    CalculatorValidator.validateCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> CalculatorValidator.validateCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -40,12 +35,8 @@ class CalculatorValidatorTest {
         String input = "\\nd//3d1d2d3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    CalculatorValidator.validateCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> CalculatorValidator.validateCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -55,12 +46,8 @@ class CalculatorValidatorTest {
         String input = "3d1d2d3//d\\n";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    CalculatorValidator.validateCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> CalculatorValidator.validateCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -70,12 +57,8 @@ class CalculatorValidatorTest {
         String input = "//1\\n1d2d3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    CalculatorValidator.validateCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> CalculatorValidator.validateCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -85,12 +68,8 @@ class CalculatorValidatorTest {
         String input = "//\\na\\n\\n1\na\n2\na\n3";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    CalculatorValidator.validateCustomDelimiter(input);
-                }
-        );
+        assertThatThrownBy(() -> CalculatorValidator.validateCustomDelimiter(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -103,12 +82,8 @@ class CalculatorValidatorTest {
         input[2] = "1";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    CalculatorValidator.validateCalculationBody(input);
-                }
-        );
+        assertThatThrownBy(() -> CalculatorValidator.validateCalculationBody(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -121,11 +96,7 @@ class CalculatorValidatorTest {
         input[2] = "1";
 
         // when & then
-        Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> {
-                    CalculatorValidator.validateCalculationBody(input);
-                }
-        );
+        assertThatThrownBy(() -> CalculatorValidator.validateCalculationBody(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
