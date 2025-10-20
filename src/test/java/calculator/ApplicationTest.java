@@ -25,6 +25,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 입력에_공백_포함() {
+        assertSimpleTest(() -> {
+            run(" // a\\n 3 a 3  ");
+            assertThat(output()).contains("결과 : 6");
+        });
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException("-1,2,3"))
